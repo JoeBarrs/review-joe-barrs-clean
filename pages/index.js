@@ -100,7 +100,7 @@ export default function Home() {
 
   return (
     <main style={{ padding: "2rem", textAlign: "center", backgroundImage: "url(/background.jpg)", backgroundSize: "cover", backgroundPosition: "center", minHeight: "100vh", backdropFilter: "brightness(0.9)" }}>
-      <div style={{ margin: "0 auto", marginBottom: "1rem", width: 160 }}>
+      <div style={ margin: "0 auto", marginBottom: "1rem", width: 160 }>
   <img
     src="https://i.imgur.com/0cSg1kl.png"
     alt="DJ Joe Barrs"
