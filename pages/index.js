@@ -91,18 +91,18 @@ export default function Home() {
 
   return (
     <main style={{ padding: "2rem", textAlign: "center" }}>
-      <div style={ margin: "0 auto", marginBottom: "1rem", width: 160 }>
+      <div style={{ margin: "0 auto", marginBottom: "1rem", width: 160 }}>
   <img
     src="https://i.imgur.com/0cSg1kl.png"
     alt="DJ Joe Barrs"
-    style={
+    style={{
       width: "100%",
       maxWidth: "100%",
       display: "block",
       margin: "0 auto",
       borderRadius: "12px",
       boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-    }
+    }}
   />
 </div>
       {step === "form" && (
