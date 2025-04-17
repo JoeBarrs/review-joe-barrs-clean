@@ -38,6 +38,7 @@ export default function Home() {
   const [answers, setAnswers] = useState({});
   const [rating, setRating] = useState(5);
   const [review, setReview] = useState("");
+  const [eventType, setEventType] = useState("");
   const [step, setStep] = useState("form");
 
   const handleToggle = (id) => {
@@ -47,6 +48,7 @@ export default function Home() {
   const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
 
   const generateReview = () => {
+    if (!eventType) return alert("Please select what kind of event or connection you had with Joe.");
     const selectedSentences = Object.keys(answers)
       .filter((id) => answers[id])
       .map((id) => {
@@ -83,7 +85,14 @@ export default function Home() {
       Math.floor(Math.random() * (intros[rating] || intros.default).length)
     ];
 
-    const fullReview = [intro, ...shuffled].join(" ");
+    const contextMap = {
+      wedding: "We hired Joe to DJ and MC our wedding, and",
+      corporate: "We had Joe at our corporate function, and",
+      vendor: "As a fellow vendor working alongside Joe, I can say",
+      other: "We worked with Joe in another capacity, and"
+    };
+    const context = contextMap[eventType] || "";
+    const fullReview = [intro, context, ...shuffled].join(" ");
 
     setReview(fullReview);
     setStep("review");
@@ -91,23 +100,34 @@ export default function Home() {
 
   return (
     <main style={{ padding: "2rem", textAlign: "center" }}>
-      <div style={{ margin: "0 auto", marginBottom: "1rem", width: 160 }}>
+      <div style={ margin: "0 auto", marginBottom: "1rem", width: 160 }>
   <img
     src="https://i.imgur.com/0cSg1kl.png"
     alt="DJ Joe Barrs"
-    style={{
+    style={
       width: "100%",
       maxWidth: "100%",
       display: "block",
       margin: "0 auto",
       borderRadius: "12px",
       boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-    }}
+    }
   />
 </div>
       {step === "form" && (
         <>
           <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginTop: "1rem" }}>
+          </h1>
+          <label style={{ display: "block", margin: "1rem 0", fontWeight: "bold" }}>
+            What was your connection to Joe?
+            <select value={eventType} onChange={(e) => setEventType(e.target.value)} required style={{ width: "100%", padding: "0.5rem", marginTop: 8 }}>
+              <option value="">-- Select an option --</option>
+              <option value="wedding">It was our wedding</option>
+              <option value="corporate">Corporate event</option>
+              <option value="vendor">I worked alongside him</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
             Quick Review Generator
           </h1>
           <div style={{ maxWidth: 400, margin: "1rem auto", textAlign: "left" }}>
@@ -190,7 +210,7 @@ export default function Home() {
             rel="noopener noreferrer"
             style={{
               display: "block",
-              backgroundColor: "#ef4444",
+              backgroundColor: "#6b7280",
               color: "white",
               padding: "0.5rem",
               borderRadius: 6,
